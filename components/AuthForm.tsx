@@ -118,7 +118,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
       </div>
 
 
-        <h3 className="flex justify-center items-center text-[25px] font-light italic">Practice job interviews with AI</h3>
+        <h3 className="flex justify-center items-center text-[20px] font-light italic">Practice job interviews with AI</h3>
 
         <Form {...form}>
           <form
