@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import Image from "next/image";
 import { cn } from "@/components/lib/utils";
@@ -151,7 +151,7 @@ const Agent = ({
             />
             {isSpeaking && <span className="animate-speak"></span>}
           </div>
-          <h3>AI Interviewer</h3>
+          <h3 className="italic">AI Interviewer</h3>
         </div>
         
         {/* User card with enhanced border animation when user is speaking */}
@@ -162,7 +162,7 @@ const Agent = ({
           )}
         >
           <div className={cn(
-            "card-content relative z-10 bg-white dark:bg-gray-900 h-full w-full flex flex-col items-center justify-center",
+            "card-content relative z-10  h-full w-full flex flex-col items-center justify-center border-primary-200/50",
             userIsSpeaking ? "animate-pulse" : ""
           )}>
             <Image
@@ -172,11 +172,11 @@ const Agent = ({
               height={539}
               className={cn(
                 "rounded-full object-cover size-[100px]",
-                userIsSpeaking ? "animate-bounce" : ""
+               
               )}
             />
-           <h3 className="flex flex-col">
-  {userName} {userIsSpeaking && "...."}
+           <h3 className="italic">
+  {userName} {userIsSpeaking && "speaking..."}
 </h3>
           </div>
         </div>

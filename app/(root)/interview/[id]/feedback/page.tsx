@@ -39,7 +39,7 @@ async function FeedbackPage({ params }: RouteParams) {
           <div className="flex flex-row gap-2 items-center">
             <Image src="/star.svg" width={22} height={22} alt="star" />
             <p>
-              Overall Impression:{" "}
+              Overall Impression : {" "}
               <span className="text-primary-200 font-bold">
                 {feedback?.totalScore}
               </span>
@@ -61,7 +61,7 @@ async function FeedbackPage({ params }: RouteParams) {
 
       <hr />
 
-      <p>{feedback?.finalAssessment}</p>
+      <p className="border-x-2 px-1">{feedback?.finalAssessment}</p>
 
       {/* Interview Breakdown */}
       <div className="flex flex-col gap-4">
@@ -87,7 +87,7 @@ async function FeedbackPage({ params }: RouteParams) {
 
       <div className="flex flex-col gap-3">
         <h3>Areas for Improvement</h3>
-        <ul>
+        <ul className="list-[lower-roman]">
           {feedback?.areasForImprovement?.map((area, index) => (
             <li key={index}>{area}</li>
           ))}
@@ -97,7 +97,7 @@ async function FeedbackPage({ params }: RouteParams) {
       <div className="buttons">
         <Button className="btn-secondary flex-1">
           <Link href="/" className="flex w-full justify-center">
-            <p className="text-sm font-semibold text-primary-200 text-center">
+            <p className="text-md font-bold text-primary-200 text-center">
               Back to dashboard
             </p>
           </Link>
@@ -108,7 +108,7 @@ async function FeedbackPage({ params }: RouteParams) {
             href={`/interview/${id}`}
             className="flex w-full justify-center"
           >
-            <p className="text-sm font-semibold text-black text-center">
+            <p className="text-md font-bold text-black text-center">
               Retake Interview
             </p>
           </Link>

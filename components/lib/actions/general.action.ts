@@ -51,6 +51,7 @@ export async function createFeedback(params: CreateFeedbackParams) {
     const feedback = await db.collection("feedback").add({
       interviewId,
       userId,
+      categoryScores,
       totalScore,
       strengths,
       areasForImprovement,

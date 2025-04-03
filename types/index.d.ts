@@ -30,7 +30,7 @@ interface Feedback {
     userId: string;
     transcript: { role: string; content: string }[];
     feedbackId?: string;
-    categoryScores?:string
+   categoryScores: string | undefined
   }
   
   interface User {
