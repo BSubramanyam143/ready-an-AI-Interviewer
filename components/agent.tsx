@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { vapi } from "@/components/lib/vapi.sdk";
 import { interviewer } from "@/constants";
 import { createFeedback } from "@/components/lib/actions/general.action";
+import { SparkleIcon, Sparkles } from "lucide-react";
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -142,13 +143,7 @@ const Agent = ({
      <div className="call-view">
         <div className="card-interviewer">
           <div className="avatar">
-            <Image
-              src="/ai-avatar.png"
-              alt="vapi"
-              width={65}
-              height={54}
-              className="object-cover"
-            />
+            <Sparkles  className="text-black h-[60px] w-[60px] "/>
             {isSpeaking && <span className="animate-speak"></span>}
           </div>
           <h3 className="italic">AI Interviewer</h3>
@@ -166,7 +161,7 @@ const Agent = ({
             userIsSpeaking ? "animate-pulse" : ""
           )}>
             <Image
-              src="/user-avatar.png"  
+              src="/user.jpeg"  
               alt="profile-image"
               width={539}
               height={539}
