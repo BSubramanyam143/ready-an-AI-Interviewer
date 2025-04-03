@@ -7,8 +7,9 @@ const Page = async () => {
   return (
     <>
  <h3 className="text-xl italic">
-  Please provide the required tech stacks and other relevant details to generate interview questions.
+  Please make a call and provide the necessary details about what you need to prepare today.
 </h3>
+
 
 
 
