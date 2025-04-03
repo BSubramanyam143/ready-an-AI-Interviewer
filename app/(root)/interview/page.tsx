@@ -7,7 +7,7 @@ const Page = async () => {
   return (
     <>
  <h3 className="text-xl italic">
-  Please make a call and provide the necessary details about what you need to prepare today.
+   click " Call " AI will ask some questions to prepare your interview.
 </h3>
 
 

@@ -3,7 +3,7 @@ import DisplayTechIcons from "@/components/DisplayTechIcons";
 import { getCurrentUser } from "@/components/lib/actions/auth.action";
 import { getInterviewById } from "@/components/lib/actions/general.action";
 // import { getRandomInterviewCover } from "@/components/lib/utils";
-import Image from "next/image";
+
 import { redirect } from "next/navigation";
 import React from "react";
 

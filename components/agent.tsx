@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
 import Image from "next/image";
 import { cn } from "@/components/lib/utils";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { vapi } from "@/components/lib/vapi.sdk";
 import { interviewer } from "@/constants";
@@ -28,6 +28,7 @@ const Agent = ({
 }: AgentProps) => {
   const router = useRouter();
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [userIsSpeaking, setUserIsSpeaking] = useState(false); // Track when user is speaking
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
   const [messages, setMessages] = useState<SavedMessage[]>([]);
 
@@ -38,12 +39,22 @@ const Agent = ({
       if (message.type === "transcript" && message.transcriptType === "final") {
         const newMessage = { role: message.role, content: message.transcript };
         setMessages((prev) => [...prev, newMessage]);
+        
+        // Check if user is speaking based on the role of the message
+        // When a user message is detected, we set userIsSpeaking to true
+        if (message.role === "user") {
+          setUserIsSpeaking(true);
+        } else {
+          // When any non-user message is detected, set userIsSpeaking to false
+          setUserIsSpeaking(false);
+        }
       }
     };
-    // speech start
+    // speech start for AI
     const onSpeechStart = () => setIsSpeaking(true);
     const onSpeechEnd = () => setIsSpeaking(false);
     const onError = (error: Error) => console.log("Error", error);
+    
     // now pass into vapi here
     vapi.on("call-start", onCallStart);
     vapi.on("call-end", onCallEnd);
@@ -128,7 +139,7 @@ const Agent = ({
 
   return (
     <>
-      <div className="call-view">
+     <div className="call-view">
         <div className="card-interviewer">
           <div className="avatar">
             <Image
@@ -142,16 +153,31 @@ const Agent = ({
           </div>
           <h3>AI Interviewer</h3>
         </div>
-        <div className="card-border">
-          <div className="card-content">
+        
+        {/* User card with enhanced border animation when user is speaking */}
+        <div 
+          className={cn(
+            "card-border relative",
+            userIsSpeaking ? "border-2  p-0.5" : ""
+          )}
+        >
+          <div className={cn(
+            "card-content relative z-10 bg-white dark:bg-gray-900 h-full w-full flex flex-col items-center justify-center",
+            userIsSpeaking ? "animate-pulse" : ""
+          )}>
             <Image
-              src="/user-avatar.png"
+              src="/user-avatar.png"  
               alt="profile-image"
               width={539}
               height={539}
-              className="rounded-full object-cover size-[120px]"
+              className={cn(
+                "rounded-full object-cover size-[100px]",
+                userIsSpeaking ? "animate-bounce" : ""
+              )}
             />
-            <h3>{userName}</h3>
+           <h3 className="flex flex-col">
+  {userName} {userIsSpeaking && "...."}
+</h3>
           </div>
         </div>
       </div>
@@ -171,6 +197,7 @@ const Agent = ({
           </div>
         </div>
       )}
+      
       {/* call status here*/}
       <div className="w-full flex justify-center">
         {callStatus !== "ACTIVE" ? (
