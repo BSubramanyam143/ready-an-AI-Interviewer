@@ -45,7 +45,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     const loadingToast = toast.loading(
-      type === "sign-up" ? "Create an account..." : "Signing in..."
+      type === "sign-up" ? "Creating an account..." : "Signing in..."
     );
 
     try {
