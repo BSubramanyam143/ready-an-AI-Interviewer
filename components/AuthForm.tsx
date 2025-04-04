@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { signIn, signUp } from "@/components/lib/actions/auth.action";
 import FormField from "./FormField";
 import { Sparkles } from "lucide-react";
+import Image from "next/image";
 
 const authFormSchema = (type: FormType) => {
   return z.object({
@@ -44,16 +45,12 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     const loadingToast = toast.loading(
-      type === "sign-up" ? "Create an  account..." : "Signing in..."
-    ); 
-
-
+      type === "sign-up" ? "Create an account..." : "Signing in..."
+    );
 
     try {
       if (type === "sign-up") {
-        
         const { name, email, password } = data;
-        
 
         const userCredential = await createUserWithEmailAndPassword(
           auth,
@@ -73,7 +70,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
           toast.error(result.message);
           return;
         }
-        toast.dismiss(loadingToast); 
+        toast.dismiss(loadingToast);
         toast.success("Account created Successfully!");
         router.push("/sign-in");
       } else {
@@ -110,15 +107,27 @@ const AuthForm = ({ type }: { type: FormType }) => {
   const isSignIn = type === "sign-in";
 
   return (
-    <div className="card-border lg:min-w-[566px] border-2 border-y-white shadow-sm shadow-white/30">
-    <div className="flex flex-col gap-6 card py-14 px-10">
-      <div className="flex flex-row gap-2 justify-center">
-        <Sparkles  height={38} width={38} />
-        <h2 className="text-primary-100">AI Interviewer</h2>
+    <div className="flex flex-row w-full max-w-4xl border-2 border-y-white shadow-sm shadow-white/30 md:mx-4 rounded-lg ">
+      {/* Sidebar */}
+      <div className="hidden lg:block w-1/3 relative">
+        <Image
+          src="/sidebar.jpg"
+          alt="Sidebar Image" 
+          layout="fill"
+          objectFit="cover"
+        />
       </div>
 
+      {/* Form Container */}
+      <div className="w-full lg:w-2/3 flex flex-col justify-center p-10">
+        <div className="flex flex-row gap-2 justify-center">
+          <Sparkles height={38} width={38} />
+          <h2 className="text-primary-100">AI Interviewer</h2>
+        </div>
 
-        <h3 className="flex justify-center items-center text-[20px] font-light italic">Practice job interviews with AI</h3>
+        <h3 className="flex justify-center items-center text-[20px] font-light italic">
+          Practice job interviews with AI
+        </h3>
 
         <Form {...form}>
           <form
@@ -157,8 +166,8 @@ const AuthForm = ({ type }: { type: FormType }) => {
           </form>
         </Form>
 
-        <p className="text-center">
-        {isSignIn ? "New to here ?" : "Already a Member?"}
+        <p className="text-center py-2">
+          {isSignIn ? "New to here ?" : "Already a Member?"}
           <Link
             href={!isSignIn ? "/sign-in" : "/sign-up"}
             className="font-bold text-user-primary ml-1"
