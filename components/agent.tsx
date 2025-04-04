@@ -149,15 +149,15 @@ const Agent = ({
           <h3 className="italic">AI Interviewer</h3>
         </div>
         
-        {/* User card with enhanced border animation when user is speaking */}
+        {/* User card with animation when user is speaking */}
         <div 
           className={cn(
             "card-border relative",
-            userIsSpeaking ? "border-2  p-0.5" : ""
+            userIsSpeaking ? "border-2  p-0.5  " : ""
           )}
         >
           <div className={cn(
-            "card-content relative z-10  h-full w-full flex flex-col items-center justify-center border-primary-200/50",
+            "card-content relative z-10  h-full w-full flex flex-col items-center justify-center border-primary-200/50 ",
             userIsSpeaking ? "animate-pulse" : ""
           )}>
             <Image
@@ -166,7 +166,7 @@ const Agent = ({
               width={539}
               height={539}
               className={cn(
-                "rounded-full object-cover size-[100px]",
+                "rounded-full object-cover size-[100px] ",
                
               )}
             />
